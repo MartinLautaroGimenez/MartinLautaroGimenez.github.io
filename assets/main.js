@@ -116,10 +116,10 @@
 
   /* ---------- aparición al hacer scroll ---------- */
   var items = document.querySelectorAll(
-    'main .label, main section > h2, .prose > *, .card, .project, .rows li, .grid2 > div, .teaser, .gallery .ph, .flow, .stat, .tags, footer h2, .pager'
+    'main .label, main section > h2, .prose > *, .card, .project, .rows li, .grid2 > div, .teaser, .gallery .ph, .flow, .stat, .tags, .event, .gallery figure, footer h2, .pager'
   );
   items.forEach(function (el) { el.classList.add('reveal'); });
-  document.querySelectorAll('.rows, .cards, .grid2, .gallery, .stats').forEach(function (group) {
+  document.querySelectorAll('.rows, .cards, .grid2, .gallery, .stats, .events').forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (el, i) { el.style.transitionDelay = (i * 0.06) + 's'; });
   });
   if ('IntersectionObserver' in window) {

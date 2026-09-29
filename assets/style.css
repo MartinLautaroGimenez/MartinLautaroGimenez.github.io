@@ -157,6 +157,21 @@ h1 .ch { display: inline-block; }
   font: 400 12px/1 "IBM Plex Mono", monospace; color: var(--muted);
   border: 1px solid var(--line); padding: 7px 9px;
 }
+/* eventos con foto */
+.events { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.event { border: 1px solid var(--line); background: var(--card); transition: border-color .3s; }
+.event:hover { border-color: var(--accent); }
+.event .ph { aspect-ratio: 4 / 3; border: 0; border-bottom: 1px solid var(--line); padding: 0; overflow: hidden; }
+.event .ph img { transition: transform .6s ease; }
+.event:hover .ph img { transform: scale(1.03); }
+.event .body { padding: 16px 18px 18px; }
+.event .yr { font: 400 12px/1 "IBM Plex Mono", monospace; color: var(--accent); display: block; margin-bottom: 8px; }
+.event h3 { font-size: 20px; }
+.event p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.gallery figure .ph { aspect-ratio: 4 / 3; }
+.gallery figcaption { font: 400 12px/1.5 "IBM Plex Mono", monospace; color: var(--muted); margin-top: 8px; }
+.cert { display: inline-block; margin-top: 8px; font-size: 14px; }
+
 .more-link { margin-top: 24px; font-size: 14px; }
 .more-link a { text-decoration: none; color: var(--accent); }
 .ph.photo { aspect-ratio: 4 / 5; }
@@ -294,6 +309,7 @@ footer .copy {
   .page-head { padding: 48px 0 32px; }
   .cards, .grid2, .gallery { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr 1fr; }
+  .events { grid-template-columns: 1fr; }
   .project { grid-template-columns: 1fr; }
   .project .num { line-height: 1.6; margin-bottom: 6px; }
   .rows li { grid-template-columns: 1fr; gap: 2px; }
