@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VitisGuard · Martín Gimenez</title>
+<meta name="description" content="VitisGuard: monitoreo IoT de bajo costo de la polilla de la vid (Lobesia botrana) en Mendoza, con conteo por inteligencia artificial. SASE 2026.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../" data-page="proyectos">
+
+<main class="wrap">
+
+  <div class="page-head">
+    <p class="crumb"><a href="../../"><span lang="es">Inicio</span><span lang="en">Home</span></a> / <a href="../"><span lang="es">Proyectos</span><span lang="en">Projects</span></a> / VitisGuard</p>
+    <h1>VitisGuard</h1>
+    <p class="lead" lang="es">Monitoreo IoT de bajo costo de la polilla de la vid (<em>Lobesia botrana</em>) en los viñedos de Mendoza: del sensor de campo al conteo por inteligencia artificial.</p>
+    <p class="lead" lang="en">Low-cost IoT monitoring of the European grapevine moth (<em>Lobesia botrana</em>) in Mendoza's vineyards: from the field sensor to AI-powered counting.</p>
+    <p class="meta"><span lang="es">Presentado en SASE 2026 · Taller AeroGlobETec · ETec UM</span><span lang="en">Presented at SASE 2026 · AeroGlobETec Workshop · ETec UM</span></p>
+  </div>
+
+  <!-- Reemplazá por: <div class="ph shot has-img"><img src="../../img/vitisguard-1.jpg" alt="Nodo VitisGuard en el viñedo"></div> -->
+  <div class="ph shot"><span lang="es">foto del nodo en el viñedo</span><span lang="en">node in the vineyard</span></div>
+
+  <section>
+    <div class="stats">
+      <div class="stat"><b>0.98</b><span lang="es">mAP@50 del detector (validación)</span><span lang="en">detector mAP@50 (validation)</span></div>
+      <div class="stat"><b>28→28</b><span lang="es">Conteo casi exacto, incluso en trampas densas</span><span lang="en">Near-exact count, even on dense traps</span></div>
+      <div class="stat"><b>≈ US$ 15</b><span lang="es">Costo estimado por nodo de campo</span><span lang="en">Estimated cost per field node</span></div>
+      <div class="stat"><b>Live</b><span lang="es">Nodo → IA → panel + alertas, en producción</span><span lang="en">Node → AI → dashboard + alerts, in production</span></div>
+    </div>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">El problema</span><span lang="en">The problem</span></p>
+    <h3><span lang="es">Una plaga que se detecta tarde y a mano</span><span lang="en">A pest detected late, by hand</span></h3>
+    <p lang="es">La <em>Lobesia botrana</em> es una de las principales plagas de la vid en Mendoza: sus larvas dañan los racimos y abren la puerta a hongos como la botrytis. El monitoreo se hace con trampas de feromona que alguien tiene que revisar a mano, finca por finca. Es poco frecuente, laborioso y llega tarde: cuando se ve la plaga ya hay daño, y la respuesta suele ser más pesticida.</p>
+    <p lang="en"><em>Lobesia botrana</em> is one of the main grapevine pests in Mendoza: its larvae damage the bunches and open the door to fungi like botrytis. Monitoring relies on pheromone traps that someone has to check by hand, farm by farm. It's infrequent, laborious and late: by the time the pest is seen there's already damage, and the usual response is more pesticide.</p>
+
+    <h3><span lang="es">La trampa se revisa sola</span><span lang="en">The trap checks itself</span></h3>
+    <p lang="es">VitisGuard automatiza ese monitoreo. Un nodo de bajo costo fotografía la trampa, una IA cuenta las polillas y un panel web muestra el estado de toda la red. Cuando la presión de plaga sube, el sistema avisa: menos recorridas al campo, decisiones a tiempo y menos agroquímicos aplicados sin necesidad.</p>
+    <p lang="en">VitisGuard automates that monitoring. A low-cost node photographs the trap, an AI counts the moths and a web dashboard shows the state of the whole network. When pest pressure rises, the system sends an alert: fewer field trips, timely decisions and fewer unnecessary agrochemicals.</p>
+  </section>
+
+  <section>
+    <p class="label"><span lang="es">Cómo funciona, de punta a punta</span><span lang="en">How it works, end to end</span></p>
+    <div class="flow">
+      <span class="node hi"><span lang="es">Nodo de trampa</span><span lang="en">Trap node</span></span>
+      <span class="edge">HTTP · WiFi / 2G</span>
+      <span class="node">Ingesta /api/ingest</span>
+      <span class="edge"></span>
+      <span class="node">YOLO11 · GPU</span>
+      <span class="edge"></span>
+      <span class="node hi"><span lang="es">Panel + alertas</span><span lang="en">Dashboard + alerts</span></span>
+    </div>
+    <ul class="rows" style="margin-top:28px">
+      <li><span class="k">01 · <span lang="es">Campo</span><span lang="en">Field</span></span><span class="v"><span lang="es">El nodo despierta, fotografía la trampa y mide temperatura y humedad.</span><span lang="en">The node wakes up, photographs the trap and measures temperature and humidity.</span><small>ESP32-CAM · DHT22</small></span></li>
+      <li><span class="k">02 · <span lang="es">Enlace</span><span lang="en">Link</span></span><span class="v"><span lang="es">Sube la foto y los datos por HTTP, por WiFi o por red celular 2G.</span><span lang="en">Uploads the photo and data over HTTP, via WiFi or 2G cellular.</span><small>POST /api/ingest</small></span></li>
+      <li><span class="k">03 · IA</span><span class="v"><span lang="es">Un detector YOLO11 en GPU cuenta las polillas de la imagen.</span><span lang="en">A YOLO11 detector on a GPU counts the moths in the image.</span><small>FastAPI · YOLO11</small></span></li>
+      <li><span class="k">04 · <span lang="es">Decisión</span><span lang="en">Decision</span></span><span class="v"><span lang="es">Mapa, series, galería y avisos por umbral de plaga.</span><span lang="en">Map, time series, gallery and pest-threshold alerts.</span><small>Flask · PostgreSQL</small></span></li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">El nodo de campo</span><span lang="en">The field node</span></p>
+    <h3><span lang="es">Poca energía, cámara y conectividad donde no hay WiFi</span><span lang="en">Low power, a camera and connectivity where there's no WiFi</span></h3>
+    <ul lang="es">
+      <li><strong>ESP32-CAM</strong> (AI-Thinker, sensor OV2640) para capturar la trampa en JPEG.</li>
+      <li><strong>DHT22</strong> para temperatura y humedad ambiente.</li>
+      <li>Batería con panel solar y medición de batería opcional.</li>
+      <li>Ciclo de <strong>deep sleep</strong>: despierta, saca la foto, mide, sube los datos y vuelve a dormir. Consumo mínimo entre capturas.</li>
+      <li>Conectividad doble: WiFi, o <strong>GPRS 2G con SIM800L</strong> para parcelas aisladas.</li>
+    </ul>
+    <ul lang="en">
+      <li><strong>ESP32-CAM</strong> (AI-Thinker, OV2640 sensor) to capture the trap as JPEG.</li>
+      <li><strong>DHT22</strong> for ambient temperature and humidity.</li>
+      <li>Battery with solar panel and optional battery monitoring.</li>
+      <li><strong>Deep sleep</strong> cycle: wake up, take the photo, measure, upload and go back to sleep. Minimal power draw between captures.</li>
+      <li>Dual connectivity: WiFi, or <strong>2G GPRS with a SIM800L</strong> for remote plots.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">Visión por computadora</span><span lang="en">Computer vision</span></p>
+    <h3><span lang="es">Una IA entrenada sin etiquetar una sola foto a mano</span><span lang="en">An AI trained without hand-labeling a single photo</span></h3>
+    <p lang="es">El conteo lo hace un detector YOLO11 que corre en una GPU propia. Pero lo interesante está en los datos: en vez de fotografiar y etiquetar miles de trampas, generamos el dataset de forma sintética. Dibujamos las polillas en posiciones conocidas, así la etiqueta sale exacta y automática.</p>
+    <p lang="es">Encima aplicamos <em>domain randomization</em>, que imita las condiciones reales de la cámara para que el modelo funcione con las fotos del campo:</p>
+    <p lang="en">Counting is done by a YOLO11 detector running on our own GPU. But the interesting part is the data: instead of photographing and labeling thousands of traps, we generated the dataset synthetically. We draw the moths at known positions, so every label is exact and automatic.</p>
+    <p lang="en">On top of that we apply <em>domain randomization</em>, mimicking real camera conditions so the model works on field photos:</p>
+    <div class="tags" lang="es">
+      <span>tinte de color</span><span>iluminación día / noche</span><span>tierra y polvo</span><span>desenfoque</span><span>fotos torcidas</span><span>negativos: texto y herrajes</span>
+    </div>
+    <div class="tags" lang="en">
+      <span>color tint</span><span>day / night lighting</span><span>dirt and dust</span><span>blur</span><span>skewed photos</span><span>negatives: text and hardware</span>
+    </div>
+    <p lang="es" style="margin-top:18px">En pruebas sobre trampas impresas, el conteo coincide con el real (0→0, 6→6, 28→28) y se mantiene con tinte de color, desenfoque y texto en el cuadro. Todo el pipeline de datos es reproducible sin volver a salir al campo.</p>
+    <p lang="en" style="margin-top:18px">In tests on printed traps, the count matches the real one (0→0, 6→6, 28→28) and holds up under color tint, blur and text in the frame. The whole data pipeline is reproducible without going back to the field.</p>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">La plataforma</span><span lang="en">The platform</span></p>
+    <h3><span lang="es">Un tablero para decidir</span><span lang="en">A dashboard to make decisions</span></h3>
+    <p lang="es">Un servidor Flask reúne la ingesta, la API, el panel y el motor de alertas. Los datos viven en PostgreSQL (Supabase autoalojado), con usuarios por rol: administrador, operador y lector. Corre en un contenedor LXC sobre Proxmox, detrás de nginx y un túnel de Cloudflare para que lleguen los nodos remotos.</p>
+    <p lang="en">A Flask server brings together ingestion, the API, the dashboard and the alert engine. Data lives in PostgreSQL (self-hosted Supabase), with role-based users: admin, operator and viewer. It runs in an LXC container on Proxmox, behind nginx and a Cloudflare tunnel so remote nodes can reach it.</p>
+    <ul lang="es">
+      <li>Mapa de nodos en las zonas vitícolas de Mendoza.</li>
+      <li>Series de capturas de plaga y de ambiente.</li>
+      <li>Galería con corrección manual y borrado individual o en lote.</li>
+      <li>Alertas por umbral de capturas y por nodos que dejan de reportar.</li>
+      <li>Reportes exportables a CSV.</li>
+    </ul>
+    <ul lang="en">
+      <li>Node map across Mendoza's wine regions.</li>
+      <li>Time series of pest captures and ambient conditions.</li>
+      <li>Gallery with manual correction and single or bulk deletion.</li>
+      <li>Alerts on capture thresholds and on nodes that stop reporting.</li>
+      <li>CSV report export.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="label">Stack</p>
+    <p class="stack">ESP32-CAM · DHT22 · SIM800L · Flask · FastAPI · YOLO11 · PostgreSQL · Supabase · Proxmox / LXC · nginx · Cloudflare</p>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">Aprendizajes</span><span lang="en">Lessons learned</span></p>
+    <h3><span lang="es">El cuello de botella no es el modelo: es la cámara</span><span lang="en">The bottleneck isn't the model, it's the camera</span></h3>
+    <p lang="es">La detección mejora más con un buen encuadre, foco e iluminación del nodo que con más entrenamiento. Los datos sintéticos permitieron iterar el modelo en horas, sin depender de juntar fotos reales.</p>
+    <p lang="en">Detection improves more with good framing, focus and lighting on the node than with more training. Synthetic data let us iterate on the model in hours, without depending on collecting real photos.</p>
+    <h3><span lang="es">Próximos pasos</span><span lang="en">Next steps</span></h3>
+    <ul lang="es">
+      <li>Ajuste fino del modelo con fotos reales de los nodos.</li>
+      <li>Mejorar la óptica y la iluminación del nodo.</li>
+      <li>Desplegar varios nodos con energía solar en producción.</li>
+    </ul>
+    <ul lang="en">
+      <li>Fine-tune the model with real photos from the nodes.</li>
+      <li>Improve the node's optics and lighting.</li>
+      <li>Deploy several solar-powered nodes in production.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="label"><span lang="es">Galería</span><span lang="en">Gallery</span></p>
+    <div class="gallery">
+      <div class="ph"><span lang="es">nodo ESP32-CAM</span><span lang="en">ESP32-CAM node</span></div>
+      <div class="ph"><span lang="es">detección de polillas</span><span lang="en">moth detection</span></div>
+      <div class="ph"><span lang="es">panel web</span><span lang="en">web dashboard</span></div>
+      <div class="ph"><span lang="es">presentación en SASE</span><span lang="en">SASE presentation</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="pager">
+      <a href="../aaf/"><span lang="es">← Anterior</span><span lang="en">← Previous</span><strong><span lang="es">Sitio AAF</span><span lang="en">AAF website</span></strong></a>
+      <a href="../rem/"><span lang="es">Siguiente →</span><span lang="en">Next →</span><strong>REM</strong></a>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../assets/main.js"></script>
+</body>
+</html>

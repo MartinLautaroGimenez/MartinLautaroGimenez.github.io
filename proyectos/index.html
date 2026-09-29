@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proyectos · Martín Gimenez</title>
-<meta name="description" content="Proyectos de Martín Gimenez: estaciones meteorológicas, sistemas de gestión, sitios web e infraestructura.">
+<meta name="description" content="Proyectos de Martín Gimenez: IoT y visión por computadora, estaciones meteorológicas, cerraduras inteligentes, sistemas de gestión y sitios web.">
 <script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,20 @@
   </div>
 
   <section>
-    <a class="project" href="rem/">
+    <a class="project" href="vitisguard/">
       <div class="num">01</div>
+      <div>
+        <h2>VitisGuard</h2>
+        <p class="role"><span lang="es">Taller AeroGlobETec · Presentado en SASE 2026</span><span lang="en">AeroGlobETec Workshop · Presented at SASE 2026</span></p>
+        <p lang="es">Monitoreo IoT de bajo costo de la polilla de la vid en los viñedos de Mendoza. Un nodo con ESP32-CAM fotografía la trampa, una IA con YOLO11 cuenta las polillas y un panel web avisa cuando sube la plaga.</p>
+        <p lang="en">Low-cost IoT monitoring of the grapevine moth in Mendoza's vineyards. An ESP32-CAM node photographs the trap, a YOLO11 model counts the moths and a web dashboard alerts when pest pressure rises.</p>
+        <p class="stack" style="margin-top:14px">ESP32-CAM · SIM800L · YOLO11 · FastAPI · Flask · PostgreSQL · Proxmox</p>
+        <p class="more"><span lang="es">Ver proyecto</span><span lang="en">View project</span> <span class="arr">→</span></p>
+      </div>
+    </a>
+
+    <a class="project" href="rem/">
+      <div class="num">02</div>
       <div>
         <h2><span lang="es">Red de Estaciones Meteorológicas (REM)</span><span lang="en">Weather Station Network (REM)</span></h2>
         <p class="role"><span lang="es">Proyecto escolar ETec · Coordinador del equipo</span><span lang="en">ETec school project · Team coordinator</span></p>
@@ -35,11 +47,34 @@
       </div>
     </a>
 
+    <a class="project" href="acceso/">
+      <div class="num">03</div>
+      <div>
+        <h2>Acceso 4.0</h2>
+        <p class="role"><span lang="es">Proyecto para la ETec · Diseño de hardware</span><span lang="en">Project for ETec · Hardware design</span></p>
+        <p lang="es">Cerraduras inteligentes de bajo costo para los laboratorios de la escuela: huella digital, cerradura de 12 V, sensor de puerta y antisabotaje.</p>
+        <p lang="en">Low-cost smart locks for the school's labs: fingerprint reader, 12 V lock, door sensor and tamper detection.</p>
+        <p class="stack" style="margin-top:14px">KiCad · ESP32 · R307S · MOSFET · LM2596</p>
+        <p class="more"><span lang="es">Ver proyecto</span><span lang="en">View project</span> <span class="arr">→</span></p>
+      </div>
+    </a>
+
+    <a class="project" href="pilly/">
+      <div class="num">04</div>
+      <div>
+        <h2>Pilly</h2>
+        <p class="role"><span lang="es">Proyecto</span><span lang="en">Project</span></p>
+        <p lang="es">Un sistema de pastilleros inteligentes para personas mayores, para que tomar la medicación a horario sea más simple y seguro.</p>
+        <p lang="en">A smart pill organizer system for older adults, making it simpler and safer to take medication on time.</p>
+        <p class="more"><span lang="es">Ver proyecto</span><span lang="en">View project</span> <span class="arr">→</span></p>
+      </div>
+    </a>
+
     <a class="project" href="agrifood/">
-      <div class="num">02</div>
+      <div class="num">05</div>
       <div>
         <h2><span lang="es">Sistema de gestión — Laboratorio AgriFood</span><span lang="en">Lab management system — AgriFood</span></h2>
-        <p class="role"><span lang="es">Trabajo para cliente · HiLetsConnect</span><span lang="en">Client work · HiLetsConnect</span></p>
+        <p class="role"><span lang="es">Trabajo para cliente · HiletsConnect</span><span lang="en">Client work · HiletsConnect</span></p>
         <p lang="es">Un sistema para un laboratorio de análisis de suelo y foliar: órdenes de trabajo, muestras, resultados, clientes, presupuestos y caja.</p>
         <p lang="en">A system for a soil and leaf analysis lab: work orders, samples, results, clients, quotes and billing.</p>
         <p class="stack" style="margin-top:14px">Node.js · SQLite · JavaScript · Linux · Proxmox</p>
@@ -48,25 +83,13 @@
     </a>
 
     <a class="project" href="aaf/">
-      <div class="num">03</div>
+      <div class="num">06</div>
       <div>
         <h2><span lang="es">Sitio web — Asociación Argentina de Fitopatólogos</span><span lang="en">Website — Argentine Association of Phytopathologists</span></h2>
-        <p class="role"><span lang="es">Trabajo para cliente · HiLetsConnect</span><span lang="en">Client work · HiLetsConnect</span></p>
+        <p class="role"><span lang="es">Trabajo para cliente · HiletsConnect</span><span lang="en">Client work · HiletsConnect</span></p>
         <p lang="es">El sitio institucional de la AAF, con noticias, publicaciones, autoridades, galería de fotos y contacto.</p>
         <p lang="en">AAF's official website, with news, publications, board members, a photo gallery and contact.</p>
         <p class="stack" style="margin-top:14px">WordPress · HTML/CSS · Hosting</p>
-        <p class="more"><span lang="es">Ver proyecto</span><span lang="en">View project</span> <span class="arr">→</span></p>
-      </div>
-    </a>
-
-    <a class="project" href="homelab/">
-      <div class="num">04</div>
-      <div>
-        <h2>Homelab</h2>
-        <p class="role"><span lang="es">Proyecto personal</span><span lang="en">Personal project</span></p>
-        <p lang="es">Un servidor Proxmox en casa con contenedores y máquinas virtuales. Ahí corren mis proyectos, servicios de clientes y experimentos.</p>
-        <p lang="en">A home Proxmox server with containers and virtual machines, running my projects, client services and experiments.</p>
-        <p class="stack" style="margin-top:14px">Proxmox · LXC · Linux · Docker · SSH</p>
         <p class="more"><span lang="es">Ver proyecto</span><span lang="en">View project</span> <span class="arr">→</span></p>
       </div>
     </a>

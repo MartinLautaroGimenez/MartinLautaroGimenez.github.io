@@ -20,7 +20,7 @@
       '<nav>' +
         '<div class="links-nav">' +
           nav('proyectos', R + 'proyectos/', 'Proyectos', 'Projects') +
-          nav('hiletsconnect', R + 'hiletsconnect/', 'HiLetsConnect', 'HiLetsConnect') +
+          nav('hiletsconnect', R + 'hiletsconnect/', 'HiletsConnect', 'HiletsConnect') +
           nav('trayectoria', R + 'trayectoria/', 'Trayectoria', 'Background') +
           '<a href="#contacto">' + t('Contacto', 'Contact') + '</a>' +
         '</div>' +
@@ -89,8 +89,8 @@
   var typed = document.getElementById('typed');
   if (typed) {
     var frases = {
-      es: ['diseñando PCBs en KiCad', 'programando ESP32', 'levantando servidores', 'armando apps y sistemas web', 'soldando placas', 'procesando imágenes satelitales'],
-      en: ['designing PCBs in KiCad', 'programming ESP32s', 'running servers', 'building apps and web systems', 'soldering boards', 'processing satellite imagery']
+      es: ['diseñando PCBs en KiCad', 'programando ESP32', 'levantando servidores', 'armando apps y sistemas web', 'soldando placas', 'entrenando modelos de visión', 'procesando imágenes satelitales'],
+      en: ['designing PCBs in KiCad', 'programming ESP32s', 'running servers', 'building apps and web systems', 'soldering boards', 'training vision models', 'processing satellite imagery']
     };
     var fi = 0, pos = 0, borrando = false;
     var lista = function () { return frases[root.dataset.lang] || frases.es; };
@@ -116,10 +116,10 @@
 
   /* ---------- aparición al hacer scroll ---------- */
   var items = document.querySelectorAll(
-    'main .label, main section > h2, .prose > *, .card, .project, .rows li, .grid2 > div, .teaser, .gallery .ph, .flow, footer h2, .pager'
+    'main .label, main section > h2, .prose > *, .card, .project, .rows li, .grid2 > div, .teaser, .gallery .ph, .flow, .stat, .tags, footer h2, .pager'
   );
   items.forEach(function (el) { el.classList.add('reveal'); });
-  document.querySelectorAll('.rows, .cards, .grid2, .gallery').forEach(function (group) {
+  document.querySelectorAll('.rows, .cards, .grid2, .gallery, .stats').forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (el, i) { el.style.transitionDelay = (i * 0.06) + 's'; });
   });
   if ('IntersectionObserver' in window) {

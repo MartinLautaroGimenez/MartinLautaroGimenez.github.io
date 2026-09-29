@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acceso 4.0 · Martín Gimenez</title>
+<meta name="description" content="Acceso 4.0: sistema de cerraduras inteligentes de bajo costo para los laboratorios de la ETec.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../" data-page="proyectos">
+
+<main class="wrap">
+
+  <div class="page-head">
+    <p class="crumb"><a href="../../"><span lang="es">Inicio</span><span lang="en">Home</span></a> / <a href="../"><span lang="es">Proyectos</span><span lang="en">Projects</span></a> / Acceso 4.0</p>
+    <h1>Acceso 4.0</h1>
+    <p class="lead" lang="es">Un sistema de cerraduras inteligentes de bajo costo para los laboratorios de nuestra escuela: acceso con huella digital, control de la cerradura y aviso si la puerta queda abierta o alguien intenta forzar el equipo.</p>
+    <p class="lead" lang="en">A low-cost smart lock system for our school's labs: fingerprint access, lock control and alerts if the door is left open or someone tries to tamper with the unit.</p>
+  </div>
+
+  <div class="ph shot has-img fit"><img src="../../img/acceso-pcb.png" alt="Vista 2D de la placa de Acceso 4.0 en KiCad"></div>
+
+  <section>
+    <ul class="rows">
+      <li><span class="k"><span lang="es">Tipo</span><span lang="en">Type</span></span><span class="v"><span lang="es">Proyecto para la ETec (UM)</span><span lang="en">Project for ETec (UM)</span></span></li>
+      <li><span class="k"><span lang="es">Mi rol</span><span lang="en">My role</span></span><span class="v"><span lang="es">Diseño del circuito y de la placa</span><span lang="en">Circuit and board design</span></span></li>
+      <li><span class="k">Stack</span><span class="v stack">KiCad · ESP32-DevKitC · R307S · IRLZ44N · LM2596 · Freerouting</span></li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">La placa</span><span lang="en">The board</span></p>
+    <p lang="es">Una sola placa que se alimenta con 12 V y maneja todo el acceso a un laboratorio:</p>
+    <p lang="en">A single board powered from 12 V that handles all access to a lab:</p>
+    <ul lang="es">
+      <li><strong>ESP32</strong> como cerebro del sistema.</li>
+      <li><strong>Lector de huellas R307S</strong> para identificar a quién entra.</li>
+      <li><strong>Cerradura eléctrica de 12 V</strong> manejada con un MOSFET IRLZ44N y un diodo de protección.</li>
+      <li><strong>Sensor de puerta</strong> (reed) para saber si quedó abierta, y <strong>sensor antisabotaje</strong> (tamper).</li>
+      <li><strong>Buzzer y LEDs</strong> para avisar al usuario.</li>
+      <li><strong>Fuente conmutada LM2596</strong> que baja de 12 V a 5 V, con fusible reseteable, protección contra inversión de polaridad y supresor de picos de tensión.</li>
+    </ul>
+    <ul lang="en">
+      <li><strong>ESP32</strong> as the brain of the system.</li>
+      <li><strong>R307S fingerprint reader</strong> to identify who comes in.</li>
+      <li><strong>12 V electric lock</strong> driven by an IRLZ44N MOSFET with a flyback diode.</li>
+      <li><strong>Door sensor</strong> (reed) to know if it's left open, plus a <strong>tamper switch</strong>.</li>
+      <li><strong>Buzzer and LEDs</strong> for user feedback.</li>
+      <li><strong>LM2596 switching regulator</strong> stepping 12 V down to 5 V, with a resettable fuse, reverse-polarity protection and a TVS diode against voltage spikes.</li>
+    </ul>
+
+    <h3><span lang="es">Del diseño a la fabricación</span><span lang="en">From design to fabrication</span></h3>
+    <p lang="es">El esquemático y la placa están hechos en KiCad, con el ruteo iterado usando Freerouting y revisión de reglas de diseño (DRC). La placa quedó lista tanto para fabricarla en la escuela por planchado como para mandarla a fabricar con sus Gerbers.</p>
+    <p lang="en">The schematic and board were made in KiCad, with routing iterated using Freerouting and design-rule checks (DRC). The board is ready both to be made at school with the toner-transfer method and to be sent out for fabrication with its Gerbers.</p>
+  </section>
+
+  <section>
+    <p class="label"><span lang="es">Galería</span><span lang="en">Gallery</span></p>
+    <div class="gallery">
+      <div class="ph"><span lang="es">esquemático</span><span lang="en">schematic</span></div>
+      <div class="ph"><span lang="es">placa armada</span><span lang="en">assembled board</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="pager">
+      <a href="../rem/"><span lang="es">← Anterior</span><span lang="en">← Previous</span><strong>REM</strong></a>
+      <a href="../pilly/"><span lang="es">Siguiente →</span><span lang="en">Next →</span><strong>Pilly</strong></a>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../assets/main.js"></script>
+</body>
+</html>
