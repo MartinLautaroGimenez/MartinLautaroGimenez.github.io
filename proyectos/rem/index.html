@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REM · Martín Gimenez</title>
+<meta name="description" content="Red de Estaciones Meteorológicas de la ETec: placas en KiCad, firmware ESP32, app Android e infraestructura de datos.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../" data-page="proyectos">
+
+<main class="wrap">
+
+  <div class="page-head">
+    <p class="crumb"><a href="../../"><span lang="es">Inicio</span><span lang="en">Home</span></a> / <a href="../"><span lang="es">Proyectos</span><span lang="en">Projects</span></a> / REM</p>
+    <h1><span lang="es">Red de Estaciones Meteorológicas</span><span lang="en">Weather Station Network</span></h1>
+    <p class="lead" lang="es">Estaciones que miden temperatura, humedad, presión, calidad de aire y luz, y mandan todo a la nube para verlo en vivo desde la web o el celular.</p>
+    <p class="lead" lang="en">Stations that measure temperature, humidity, pressure, air quality and light, and send everything to the cloud to view live on the web or a phone.</p>
+    <p class="links"><a href="https://emetec.wetec.um.edu.ar/" target="_blank" rel="noopener"><span lang="es">Ver el sitio del proyecto</span><span lang="en">Visit the project site</span> ↗</a></p>
+  </div>
+
+  <!-- Reemplazá por: <div class="ph shot"><img src="../../img/rem-1.jpg" alt="Estación REM"></div> -->
+  <div class="ph shot"><span lang="es">foto principal de la estación</span><span lang="en">main station photo</span></div>
+
+  <section>
+    <ul class="rows">
+      <li><span class="k"><span lang="es">Tipo</span><span lang="en">Type</span></span><span class="v"><span lang="es">Proyecto escolar · ETec (UM)</span><span lang="en">School project · ETec (UM)</span></span></li>
+      <li><span class="k"><span lang="es">Mi rol</span><span lang="en">My role</span></span><span class="v"><span lang="es">Coordinador del equipo. Placas, firmware, app e infraestructura.</span><span lang="en">Team coordinator. Boards, firmware, app and infrastructure.</span></span></li>
+      <li><span class="k">Stack</span><span class="v stack">KiCad · ESP32 / ESP32-C3 · C++ · PlatformIO · MQTT · Node-RED · InfluxDB · Grafana · Next.js · React Native · BLE · Docker</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="label"><span lang="es">Cómo viajan los datos</span><span lang="en">How the data flows</span></p>
+    <div class="flow">
+      <span class="node hi"><span lang="es">Estación</span><span lang="en">Station</span> ESP32</span>
+      <span class="edge">MQTT/TLS</span>
+      <span class="node">HiveMQ Cloud</span>
+      <span class="edge"></span>
+      <span class="node">Node-RED</span>
+      <span class="edge"></span>
+      <span class="node">InfluxDB</span>
+      <span class="edge"></span>
+      <span class="node hi">Dashboard web</span>
+    </div>
+    <div class="prose">
+      <p lang="es">Cada estación publica sus mediciones por MQTT. Node-RED las recibe, las guarda en InfluxDB para tener el histórico y las reenvía por WebSocket al dashboard, que se actualiza en tiempo real. La app Android se conecta al mismo broker para ver toda la red desde cualquier lado.</p>
+      <p lang="en">Each station publishes its readings over MQTT. Node-RED receives them, stores them in InfluxDB for history and forwards them over WebSocket to the dashboard, which updates in real time. The Android app connects to the same broker to see the whole network from anywhere.</p>
+    </div>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">Qué hice</span><span lang="en">What I did</span></p>
+
+    <h3><span lang="es">Hardware</span><span lang="en">Hardware</span></h3>
+    <p lang="es">Dos placas diseñadas en KiCad: la estación fija y la micro estación. También los modelos 3D del gabinete y la protección para los sensores, para imprimir.</p>
+    <p lang="en">Two boards designed in KiCad: the fixed station and the micro station. Also the 3D models for the enclosure and sensor shield, ready to print.</p>
+
+    <h3>Firmware</h3>
+    <p lang="es">Un solo código que compila para dos placas (ESP32 DevKit y ESP32-C3 SuperMini), con todo lo que depende del hardware separado en un único archivo.</p>
+    <p lang="en">A single codebase that builds for two boards (ESP32 DevKit and ESP32-C3 SuperMini), with everything hardware-specific kept in one file.</p>
+    <ul lang="es">
+      <li>Sensores BME680, BME280, DHT22 y BH1750, que se activan o desactivan desde la app sin recompilar.</li>
+      <li>Publicación por MQTT sobre TLS y pantalla OLED o LCD opcional.</li>
+      <li>Configuración por Bluetooth o por portal cautivo desde el navegador.</li>
+      <li>Deep sleep entre mediciones para funcionar a batería o con panel solar.</li>
+      <li>Actualización por aire (OTA) sin bajar la estación del poste.</li>
+    </ul>
+    <ul lang="en">
+      <li>BME680, BME280, DHT22 and BH1750 sensors, enabled or disabled from the app without recompiling.</li>
+      <li>MQTT over TLS publishing and an optional OLED or LCD display.</li>
+      <li>Setup over Bluetooth or through a captive portal in the browser.</li>
+      <li>Deep sleep between readings to run on battery or solar.</li>
+      <li>Over-the-air (OTA) updates without taking the station down from its pole.</li>
+    </ul>
+
+    <h3><span lang="es">App Android</span><span lang="en">Android app</span></h3>
+    <p lang="es">Hecha con React Native y Expo. Usa dos caminos según el caso: Bluetooth para configurar una estación que tenés al lado (por ejemplo, cargarle el WiFi cuando todavía no tiene internet) y MQTT para ver y controlar estaciones que están lejos. También registra los recorridos de las estaciones móviles.</p>
+    <p lang="en">Built with React Native and Expo. It uses two paths depending on the case: Bluetooth to set up a station right next to you (for example, giving it WiFi credentials before it has internet) and MQTT to view and control stations far away. It also logs trips for mobile stations.</p>
+
+    <h3><span lang="es">Infraestructura y web</span><span lang="en">Infrastructure and web</span></h3>
+    <p lang="es">Node-RED, InfluxDB y Grafana en Docker, y un dashboard en Next.js. Desde el panel se publican las actualizaciones de firmware: cada binario queda asociado a su modelo de placa, se elige qué versión le toca a cada estación y se guarda el historial completo, así volver a una versión anterior es tan simple como elegirla.</p>
+    <p lang="en">Node-RED, InfluxDB and Grafana in Docker, plus a Next.js dashboard. Firmware updates are published from the panel: each binary is tied to its board model, you pick which version each station gets, and the full history is kept, so rolling back is as simple as selecting an older version.</p>
+  </section>
+
+  <section>
+    <p class="label"><span lang="es">Galería</span><span lang="en">Gallery</span></p>
+    <div class="gallery">
+      <div class="ph"><span lang="es">PCB en KiCad</span><span lang="en">PCB in KiCad</span></div>
+      <div class="ph"><span lang="es">placa armada</span><span lang="en">assembled board</span></div>
+      <div class="ph"><span lang="es">dashboard web</span><span lang="en">web dashboard</span></div>
+      <div class="ph"><span lang="es">app Android</span><span lang="en">Android app</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="pager">
+      <a href="../homelab/"><span lang="es">← Anterior</span><span lang="en">← Previous</span><strong>Homelab</strong></a>
+      <a href="../agrifood/"><span lang="es">Siguiente →</span><span lang="en">Next →</span><strong>AgriFood</strong></a>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../assets/main.js"></script>
+</body>
+</html>

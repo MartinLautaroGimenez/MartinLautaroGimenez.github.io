@@ -9,219 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f7f6f2;
-    --text: #1c1c1a;
-    --muted: #6b6a64;
-    --line: #dcdad2;
-    --accent: #2f5d50;
-    --ph: #ecebe5;
-    --trace: #e3e1d8;
-    --head: rgba(247, 246, 242, 0.88);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #151514;
-      --text: #e8e6df;
-      --muted: #9a988f;
-      --line: #2e2d2a;
-      --accent: #8fbfae;
-      --ph: #1f1f1d;
-      --trace: #252523;
-      --head: rgba(21, 21, 20, 0.88);
-    }
-  }
-
-  /* fondo de pistas */
-  #bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
-
-  /* aparición al hacer scroll */
-  .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease, padding-left .3s ease; }
-  .js .reveal.in { opacity: 1; transform: none; }
-
-  /* texto que se escribe */
-  .typing {
-    font: 400 13px/1 "IBM Plex Mono", monospace; color: var(--accent);
-    margin-bottom: 22px; min-height: 13px;
-  }
-  .typing::before { content: "> "; color: var(--muted); }
-  .typing .caret {
-    display: inline-block; width: 7px; height: 14px; margin-left: 2px;
-    background: var(--accent); vertical-align: -2px;
-    animation: blink 1s steps(1) infinite;
-  }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  /* nombre letra por letra */
-  h1 .ch { display: inline-block; }
-  .js h1 .ch { opacity: 0; transform: translateY(0.35em); animation: up .8s cubic-bezier(.2,.7,.2,1) forwards; }
-  @keyframes up { to { opacity: 1; transform: none; } }
-
-  @media (prefers-reduced-motion: reduce) {
-    .js .reveal, .js h1 .ch { opacity: 1; transform: none; animation: none; transition: none; }
-    .typing .caret { animation: none; }
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font: 400 16px/1.65 "IBM Plex Sans", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 3px; }
-  a:hover { color: var(--accent); text-decoration-color: currentColor; }
-
-  /* idioma */
-  html[data-lang="es"] [lang="en"],
-  html[data-lang="en"] [lang="es"] { display: none; }
-
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-
-  /* cabecera */
-  header {
-    position: sticky; top: 0; z-index: 10;
-    background: var(--head);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid transparent;
-    transition: border-color .3s;
-  }
-  header.scrolled { border-bottom-color: var(--line); }
-  header .wrap {
-    display: flex; align-items: center; justify-content: space-between;
-    height: 56px; gap: 16px;
-  }
-  .brand { font-weight: 500; text-decoration: none; }
-  nav { display: flex; gap: 22px; font-size: 14px; align-items: center; }
-  nav a { text-decoration: none; color: var(--muted); }
-  nav a:hover { color: var(--text); }
-  .lang {
-    font: 400 12px/1 "IBM Plex Mono", monospace;
-    background: none; border: 1px solid var(--line); color: var(--text);
-    padding: 6px 8px; cursor: pointer; border-radius: 2px;
-  }
-  .lang:hover { border-color: var(--text); }
-
-  /* intro */
-  .intro {
-    display: grid; grid-template-columns: 1fr 180px; gap: 48px;
-    padding: 88px 0 72px; align-items: end;
-  }
-  h1 {
-    font: 400 clamp(44px, 7vw, 68px)/1.02 "Newsreader", Georgia, serif;
-    letter-spacing: -0.02em; margin-bottom: 24px;
-  }
-  .lead { font-size: 19px; max-width: 34em; }
-  .meta {
-    margin-top: 20px; font: 400 13px/1.6 "IBM Plex Mono", monospace; color: var(--muted);
-  }
-
-  /* marcadores de foto */
-  .ph {
-    background: var(--ph);
-    border: 1px dashed var(--line);
-    display: flex; align-items: center; justify-content: center;
-    font: 400 12px/1.4 "IBM Plex Mono", monospace; color: var(--muted);
-    text-align: center; padding: 12px;
-  }
-  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .ph.photo { aspect-ratio: 4 / 5; }
-  .ph.shot { aspect-ratio: 16 / 10; }
-
-  /* secciones */
-  section { border-top: 1px solid var(--line); padding: 56px 0; }
-  .label {
-    font: 400 12px/1 "IBM Plex Mono", monospace; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--muted); margin-bottom: 32px;
-  }
-  h2 {
-    font: 400 30px/1.2 "Newsreader", Georgia, serif; letter-spacing: -0.01em;
-  }
-  p + p { margin-top: 1em; }
-  .about p { max-width: 38em; font-size: 17px; }
-
-  /* proyectos */
-  .project {
-    display: grid; grid-template-columns: 56px 1fr; gap: 0 8px;
-    padding: 40px 0; border-top: 1px solid var(--line);
-  }
-  .project:first-of-type { border-top: 0; padding-top: 0; }
-  .num { font: 400 13px/2.4 "IBM Plex Mono", monospace; color: var(--muted); transition: color .3s; }
-  .num::after {
-    content: ""; display: block; width: 0; height: 1px; background: var(--accent);
-    margin-top: 2px; transition: width .4s ease;
-  }
-  .project:hover .num { color: var(--accent); }
-  .project:hover .num::after { width: 28px; }
-  .project h2 { transition: color .3s; }
-  .project:hover h2 { color: var(--accent); }
-  .project .ph { transition: border-color .3s, transform .4s ease; }
-  .project:hover .ph { border-color: var(--accent); transform: translateY(-3px); }
-  .rows li { transition: padding-left .3s ease; }
-  .rows li:hover { padding-left: 6px; }
-  .rows li:hover .k { color: var(--accent); }
-  .project .role { color: var(--muted); font-size: 14px; margin: 4px 0 18px; }
-  .project .body { max-width: 40em; }
-  .project ul.points { margin: 14px 0 0 18px; }
-  .project ul.points li { margin-bottom: 6px; }
-  .project .ph { margin: 24px 0 18px; }
-  .stack {
-    font: 400 13px/1.7 "IBM Plex Mono", monospace; color: var(--muted);
-  }
-  .links { margin-top: 10px; font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
-
-  /* filas tipo tabla */
-  .rows { list-style: none; }
-  .rows li {
-    display: grid; grid-template-columns: 160px 1fr; gap: 16px;
-    padding: 14px 0; border-top: 1px solid var(--line);
-  }
-  .rows li:last-child { border-bottom: 1px solid var(--line); }
-  .rows .k { font: 400 13px/1.9 "IBM Plex Mono", monospace; color: var(--muted); }
-  .rows .v small { display: block; color: var(--muted); font-size: 14px; }
-
-  .job h2 { margin-bottom: 4px; }
-  .job .role { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
-  .job p { max-width: 38em; }
-
-  .contact h2 { margin-bottom: 20px; max-width: 18em; }
-  .contact .rows .v a { text-decoration: none; }
-  .contact .rows .v a:hover { text-decoration: underline; }
-
-  footer {
-    border-top: 1px solid var(--line); padding: 28px 0 40px;
-    font: 400 12px/1.6 "IBM Plex Mono", monospace; color: var(--muted);
-  }
-
-  @media (max-width: 720px) {
-    nav a { display: none; }
-    .intro { grid-template-columns: 1fr; padding: 56px 0 48px; gap: 32px; }
-    .intro .ph.photo { width: 140px; order: -1; }
-    .project { grid-template-columns: 1fr; }
-    .num { line-height: 1.6; margin-bottom: 6px; }
-    .rows li { grid-template-columns: 1fr; gap: 2px; }
-    section { padding: 44px 0; }
-  }
-</style>
+<link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-
-<canvas id="bg" aria-hidden="true"></canvas>
-
-<header>
-  <div class="wrap">
-    <a href="#" class="brand">Martín Gimenez</a>
-    <nav>
-      <a href="#proyectos"><span lang="es">Proyectos</span><span lang="en">Projects</span></a>
-      <a href="#experiencia"><span lang="es">Experiencia</span><span lang="en">Experience</span></a>
-      <a href="#habilidades"><span lang="es">Habilidades</span><span lang="en">Skills</span></a>
-      <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
-      <button class="lang" id="lang" type="button" aria-label="Cambiar idioma / Switch language">EN</button>
-    </nav>
-  </div>
-</header>
+<body data-root="" data-page="inicio">
 
 <main class="wrap">
 
@@ -240,412 +30,72 @@
     <div class="ph photo"><span lang="es">tu foto</span><span lang="en">your photo</span></div>
   </div>
 
-  <section class="about">
+  <section class="prose">
     <p class="label"><span lang="es">Sobre mí</span><span lang="en">About</span></p>
     <p lang="es">Me gusta entender un sistema de punta a punta: desde el sensor soldado en la placa hasta el gráfico que alguien mira en el celular. Casi todo lo que sé lo aprendí haciendo, rompiendo y volviendo a intentar, y la mayoría de mis proyectos terminan cruzando varias áreas a la vez.</p>
-    <p lang="es">Además de la escuela, tengo <strong>HiLetsConnect</strong>, desde donde hago trabajos de web, sistemas, servidores y electrónica para instituciones y empresas. Me siento cómodo trabajando en equipo y coordinando, y me tomo en serio los plazos.</p>
     <p lang="en">I like understanding a system end to end: from the sensor soldered on the board to the chart someone checks on their phone. Most of what I know I learned by building, breaking and trying again, and most of my projects end up spanning several areas at once.</p>
-    <p lang="en">Alongside school I run <strong>HiLetsConnect</strong>, doing web, software, server and electronics work for institutions and companies. I'm comfortable working in teams and coordinating them, and I take deadlines seriously.</p>
   </section>
 
-  <section id="proyectos">
-    <p class="label"><span lang="es">Proyectos</span><span lang="en">Projects</span></p>
+  <section>
+    <p class="label"><span lang="es">Proyectos destacados</span><span lang="en">Featured projects</span></p>
+    <div class="cards">
+      <a class="card" href="proyectos/rem/">
+        <span class="num">01</span>
+        <h3><span lang="es">Red de Estaciones Meteorológicas</span><span lang="en">Weather Station Network</span></h3>
+        <p lang="es">Estaciones con ESP32 que miden el ambiente y mandan los datos a la nube. Placas, firmware, app y servidores.</p>
+        <p lang="en">ESP32 stations that measure the environment and send data to the cloud. Boards, firmware, app and servers.</p>
+        <span class="foot"><span>KiCad · ESP32 · MQTT · Next.js</span><span class="arrow">→</span></span>
+      </a>
+      <a class="card" href="proyectos/agrifood/">
+        <span class="num">02</span>
+        <h3><span lang="es">Sistema de laboratorio AgriFood</span><span lang="en">AgriFood lab system</span></h3>
+        <p lang="es">Gestión de muestras, resultados, clientes y caja para un laboratorio de análisis de suelo y foliar.</p>
+        <p lang="en">Sample, results, client and billing management for a soil and leaf analysis lab.</p>
+        <span class="foot"><span>Node.js · SQLite · Linux</span><span class="arrow">→</span></span>
+      </a>
+      <a class="card" href="proyectos/aaf/">
+        <span class="num">03</span>
+        <h3><span lang="es">Sitio web de la AAF</span><span lang="en">AAF website</span></h3>
+        <p lang="es">El sitio institucional de la Asociación Argentina de Fitopatólogos.</p>
+        <p lang="en">The official website of the Argentine Association of Phytopathologists.</p>
+        <span class="foot"><span>WordPress · Hosting</span><span class="arrow">→</span></span>
+      </a>
+      <a class="card" href="proyectos/homelab/">
+        <span class="num">04</span>
+        <h3>Homelab</h3>
+        <p lang="es">Mi servidor Proxmox en casa, donde corren mis proyectos y servicios de clientes.</p>
+        <p lang="en">My home Proxmox server, running my projects and client services.</p>
+        <span class="foot"><span>Proxmox · LXC · Docker</span><span class="arrow">→</span></span>
+      </a>
+    </div>
+  </section>
 
-    <article class="project">
-      <div class="num">01</div>
+  <section>
+    <a class="teaser" href="hiletsconnect/">
       <div>
-        <h2><span lang="es">Red de Estaciones Meteorológicas (REM)</span><span lang="en">Weather Station Network (REM)</span></h2>
-        <p class="role"><span lang="es">Proyecto escolar ETec · Coordinador del equipo · hardware, firmware, app e infraestructura</span><span lang="en">ETec school project · Team coordinator · hardware, firmware, app and infrastructure</span></p>
-        <div class="body">
-          <p lang="es">Una red de estaciones que miden y registran condiciones ambientales en distintos puntos. Hay estaciones fijas y móviles; cada una manda sus datos a la nube y se ven en vivo desde la web o desde una app.</p>
-          <p lang="en">A network of stations that measure and log environmental conditions at different sites. There are fixed and mobile stations; each one sends its data to the cloud, viewable live on the web or in an app.</p>
-          <ul class="points" lang="es">
-            <li>Dos placas diseñadas en KiCad: la estación fija y la micro.</li>
-            <li>Firmware para ESP32 con sensores BME680 y DHT22, deep sleep para ahorrar batería y portal cautivo para la configuración.</li>
-            <li>Los datos viajan por MQTT a Node-RED, se guardan en InfluxDB y se muestran en un dashboard en tiempo real hecho con Next.js.</li>
-            <li>Actualizaciones de firmware por OTA, separadas por modelo de placa y con historial de versiones para poder volver atrás.</li>
-            <li>App Android que configura las estaciones por Bluetooth y las monitorea a distancia por MQTT.</li>
-          </ul>
-          <ul class="points" lang="en">
-            <li>Two boards designed in KiCad: the fixed station and the micro station.</li>
-            <li>ESP32 firmware with BME680 and DHT22 sensors, deep sleep to save battery, and a captive portal for setup.</li>
-            <li>Data travels over MQTT to Node-RED, is stored in InfluxDB and shown on a real-time Next.js dashboard.</li>
-            <li>OTA firmware updates, split by board model, with full version history for rollbacks.</li>
-            <li>Android app that configures stations over Bluetooth and monitors them remotely over MQTT.</li>
-          </ul>
-        </div>
-        <!-- Reemplazá por: <div class="ph shot"><img src="img/rem.jpg" alt="Estación REM"></div> -->
-        <div class="ph shot"><span lang="es">foto de la estación / placa</span><span lang="en">station / board photo</span></div>
-        <p class="stack">KiCad · ESP32 · C++ · MQTT · Node-RED · InfluxDB · Grafana · Next.js · React Native · BLE · Docker</p>
-        <p class="links"><a href="https://emetec.wetec.um.edu.ar/" target="_blank" rel="noopener"><span lang="es">Ver sitio</span><span lang="en">Visit site</span> ↗</a></p>
+        <p class="label">HiLetsConnect</p>
+        <h2><span lang="es">Mi emprendimiento de tecnología integral</span><span lang="en">My end-to-end technology business</span></h2>
+        <p lang="es">Sitios web, sistemas a medida, servidores y electrónica para instituciones y empresas.</p>
+        <p lang="en">Websites, custom software, servers and electronics for institutions and companies.</p>
       </div>
-    </article>
+      <span class="arrow">→</span>
+    </a>
+  </section>
 
-    <article class="project">
-      <div class="num">02</div>
+  <section>
+    <a class="teaser" href="trayectoria/">
       <div>
-        <h2><span lang="es">Sistema de gestión — Laboratorio AgriFood</span><span lang="en">Lab management system — AgriFood</span></h2>
-        <p class="role"><span lang="es">Trabajo para cliente · HiLetsConnect · desarrollo completo y puesta en producción</span><span lang="en">Client work · HiLetsConnect · full development and deployment</span></p>
-        <div class="body">
-          <p lang="es">Un sistema para el laboratorio de análisis de suelo y foliar AgriFood. Reemplaza las planillas sueltas por un solo lugar donde se reciben las órdenes de trabajo, se cargan los resultados y se lleva la parte administrativa.</p>
-          <p lang="en">A system for AgriFood, a soil and leaf analysis lab. It replaces scattered spreadsheets with one place to receive work orders, enter results and handle the admin side.</p>
-          <ul class="points" lang="es">
-            <li>Órdenes de trabajo con varias muestras, carga de resultados en planilla y catálogo de determinaciones con escalas de interpretación.</li>
-            <li>Clientes, presupuestos y caja, con roles distintos para administración, recepción y analistas.</li>
-            <li>Hecho con Node y SQLite sin dependencias externas: sin build ni paquetes, fácil de mantener.</li>
-            <li>Corre en un contenedor propio con servicio systemd y copias de seguridad automáticas.</li>
-          </ul>
-          <ul class="points" lang="en">
-            <li>Multi-sample work orders, spreadsheet-style result entry and a test catalogue with interpretation scales.</li>
-            <li>Clients, quotes and cash register, with separate roles for admins, front desk and analysts.</li>
-            <li>Built with Node and SQLite and zero external dependencies: no build step or packages, easy to maintain.</li>
-            <li>Runs in its own container as a systemd service, with automatic backups.</li>
-          </ul>
-        </div>
-        <!-- Reemplazá por: <div class="ph shot"><img src="img/agrifood.png" alt="Sistema AgriFood"></div> -->
-        <div class="ph shot"><span lang="es">captura del sistema</span><span lang="en">system screenshot</span></div>
-        <p class="stack">Node.js · SQLite · JavaScript · HTML/CSS · Linux · systemd · Proxmox</p>
+        <p class="label"><span lang="es">Trayectoria</span><span lang="en">Background</span></p>
+        <h2><span lang="es">Formación, cursos y eventos</span><span lang="en">Education, courses and events</span></h2>
+        <p lang="es">ETec, el curso de teledetección de la CONAE, SASE, Feria Pierre Auger y más.</p>
+        <p lang="en">ETec, the CONAE remote sensing course, SASE, the Pierre Auger Fair and more.</p>
       </div>
-    </article>
-
-    <article class="project">
-      <div class="num">03</div>
-      <div>
-        <h2><span lang="es">Sitio web — Asociación Argentina de Fitopatólogos</span><span lang="en">Website — Argentine Association of Phytopathologists</span></h2>
-        <p class="role"><span lang="es">Trabajo para cliente · HiLetsConnect</span><span lang="en">Client work · HiLetsConnect</span></p>
-        <div class="body">
-          <p lang="es">El sitio institucional de la AAF, una asociación civil que reúne a investigadores de patología vegetal de todo el país. Incluye noticias, publicaciones, autoridades, galería de fotos y contacto.</p>
-          <p lang="en">The official website of AAF, a non-profit that brings together plant pathology researchers from across Argentina. It includes news, publications, board members, a photo gallery and contact.</p>
-        </div>
-        <!-- Reemplazá por: <div class="ph shot"><img src="img/aaf.png" alt="Sitio AAF"></div> -->
-        <div class="ph shot"><span lang="es">captura del sitio</span><span lang="en">site screenshot</span></div>
-        <p class="stack">WordPress · HTML/CSS · <span lang="es">hosting y dominio</span><span lang="en">hosting &amp; domain</span></p>
-        <p class="links"><a href="https://aafitopatologos.com.ar/" target="_blank" rel="noopener">aafitopatologos.com.ar ↗</a></p>
-      </div>
-    </article>
-
-    <article class="project">
-      <div class="num">04</div>
-      <div>
-        <h2>Homelab</h2>
-        <p class="role"><span lang="es">Proyecto personal</span><span lang="en">Personal project</span></p>
-        <div class="body">
-          <p lang="es">Un servidor en casa con Proxmox donde pruebo y hago correr cosas reales: contenedores LXC y máquinas virtuales para mis proyectos, servicios de clientes y experimentos. Es donde aprendí Linux, redes y a mantener servicios andando solos.</p>
-          <p lang="en">A home server running Proxmox where I test and run real things: LXC containers and virtual machines for my projects, client services and experiments. It's where I learned Linux, networking and keeping services running on their own.</p>
-        </div>
-        <p class="stack">Proxmox · LXC · Linux · Docker · <span lang="es">redes</span><span lang="en">networking</span> · SSH</p>
-      </div>
-    </article>
-  </section>
-
-  <section id="experiencia" class="job">
-    <p class="label"><span lang="es">Experiencia</span><span lang="en">Experience</span></p>
-    <h2>HiLetsConnect</h2>
-    <p class="role"><span lang="es">Fundador · Freelance</span><span lang="en">Founder · Freelance</span></p>
-    <p lang="es">Tecnología integral: sitios web, sistemas a medida, servidores y electrónica. Me ocupo de todo el proceso, desde entender qué necesita el cliente hasta dejarlo funcionando y darle soporte.</p>
-    <p lang="en">End-to-end technology services: websites, custom software, servers and electronics. I handle the whole process, from understanding what the client needs to getting it running and supporting it.</p>
-  </section>
-
-  <section id="eventos">
-    <p class="label"><span lang="es">Eventos y participaciones</span><span lang="en">Events</span></p>
-    <ul class="rows">
-      <li><span class="k">2026</span><span class="v">SASE <small lang="es">Simposio Argentino de Sistemas Embebidos</small><small lang="en">Argentine Symposium on Embedded Systems</small></span></li>
-      <li><span class="k">2026</span><span class="v"><span lang="es">Semana de la Ciencia y la Tecnología</span><span lang="en">Science and Technology Week</span></span></li>
-      <li><span class="k">2025</span><span class="v">SASE <small lang="es">Simposio Argentino de Sistemas Embebidos</small><small lang="en">Argentine Symposium on Embedded Systems</small></span></li>
-      <li><span class="k">2024</span><span class="v">SASE <small lang="es">Simposio Argentino de Sistemas Embebidos</small><small lang="en">Argentine Symposium on Embedded Systems</small></span></li>
-      <li><span class="k">2024</span><span class="v"><span lang="es">Feria Pierre Auger</span><span lang="en">Pierre Auger Fair</span></span></li>
-    </ul>
-  </section>
-
-  <section id="habilidades">
-    <p class="label"><span lang="es">Habilidades</span><span lang="en">Skills</span></p>
-    <ul class="rows">
-      <li><span class="k"><span lang="es">Electrónica</span><span lang="en">Electronics</span></span><span class="v"><span lang="es">Diseño de PCB en KiCad, Arduino y ESP32, soldadura y armado de placas</span><span lang="en">PCB design in KiCad, Arduino and ESP32, soldering and board assembly</span></span></li>
-      <li><span class="k">Software</span><span class="v">C / C++, Python, JavaScript, HTML / CSS, Node.js, Next.js, React Native</span></li>
-      <li><span class="k"><span lang="es">Infraestructura</span><span lang="en">Infrastructure</span></span><span class="v"><span lang="es">Linux, Proxmox, Docker, redes, MQTT</span><span lang="en">Linux, Proxmox, Docker, networking, MQTT</span></span></li>
-      <li><span class="k"><span lang="es">Idiomas</span><span lang="en">Languages</span></span><span class="v"><span lang="es">Español nativo · Inglés básico (lectura técnica)</span><span lang="en">Spanish (native) · English (basic, technical reading)</span></span></li>
-      <li><span class="k"><span lang="es">Otras</span><span lang="en">Other</span></span><span class="v"><span lang="es">Autodidacta, trabajo en equipo, resolución de problemas, responsabilidad</span><span lang="en">Self-taught, teamwork, problem solving, reliability</span></span></li>
-    </ul>
-  </section>
-
-  <section id="contacto" class="contact">
-    <p class="label"><span lang="es">Contacto</span><span lang="en">Contact</span></p>
-    <h2><span lang="es">Si tenés un proyecto o una propuesta, escribime.</span><span lang="en">If you have a project or an opportunity, get in touch.</span></h2>
-    <ul class="rows">
-      <li><span class="k">Email</span><span class="v"><a href="mailto:mgimenez@hiletsconnect.com.ar">mgimenez@hiletsconnect.com.ar</a></span></li>
-      <li><span class="k">GitHub</span><span class="v"><a href="https://github.com/MartinLautaroGimenez" target="_blank" rel="noopener">MartinLautaroGimenez</a></span></li>
-      <li><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/mart%C3%ADn-gimenez-747207352/" target="_blank" rel="noopener">Martín Gimenez</a></span></li>
-      <li><span class="k">Instagram</span><span class="v"><a href="https://www.instagram.com/_martingimeneez_/" target="_blank" rel="noopener">@_martingimeneez_</a></span></li>
-    </ul>
+      <span class="arrow">→</span>
+    </a>
   </section>
 
 </main>
 
-<footer>
-  <div class="wrap">Martín Gimenez · Mendoza, Argentina · 2026</div>
-</footer>
-
-<script>
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- idioma ---------- */
-  (function () {
-    var root = document.documentElement;
-    var btn = document.getElementById('lang');
-    function set(l) {
-      root.dataset.lang = l;
-      root.lang = l;
-      btn.textContent = l === 'es' ? 'EN' : 'ES';
-      try { localStorage.setItem('lang', l); } catch (e) {}
-    }
-    var saved = null;
-    try { saved = localStorage.getItem('lang'); } catch (e) {}
-    set(saved === 'en' ? 'en' : 'es');
-    btn.addEventListener('click', function () {
-      set(root.dataset.lang === 'es' ? 'en' : 'es');
-    });
-  })();
-
-  /* ---------- nombre letra por letra ---------- */
-  (function () {
-    var h = document.getElementById('name');
-    var txt = h.textContent;
-    h.setAttribute('aria-label', txt);
-    h.textContent = '';
-    txt.split('').forEach(function (c, i) {
-      var s = document.createElement('span');
-      s.className = 'ch';
-      s.setAttribute('aria-hidden', 'true');
-      s.textContent = c === ' ' ? ' ' : c;
-      s.style.animationDelay = (0.15 + i * 0.035) + 's';
-      h.appendChild(s);
-    });
-  })();
-
-  /* ---------- texto que se escribe ---------- */
-  (function () {
-    var el = document.getElementById('typed');
-    var frases = {
-      es: ['diseñando PCBs en KiCad', 'programando ESP32', 'levantando servidores', 'armando apps y sistemas web', 'soldando placas'],
-      en: ['designing PCBs in KiCad', 'programming ESP32s', 'running servers', 'building apps and web systems', 'soldering boards']
-    };
-    var i = 0, pos = 0, borrando = false;
-    function lista() { return frases[document.documentElement.dataset.lang] || frases.es; }
-    if (reduce) { el.textContent = lista()[0]; return; }
-    function tick() {
-      var f = lista()[i % lista().length];
-      if (!borrando) {
-        pos++;
-        el.textContent = f.slice(0, pos);
-        if (pos >= f.length) { borrando = true; return setTimeout(tick, 1800); }
-        setTimeout(tick, 55 + Math.random() * 60);
-      } else {
-        pos--;
-        el.textContent = f.slice(0, pos);
-        if (pos <= 0) { borrando = false; i++; return setTimeout(tick, 350); }
-        setTimeout(tick, 28);
-      }
-    }
-    setTimeout(tick, 900);
-  })();
-
-  /* ---------- aparición al hacer scroll ---------- */
-  (function () {
-    var items = document.querySelectorAll('section .label, section > h2, section > p, .project, .rows li, .about p');
-    items.forEach(function (el) { el.classList.add('reveal'); });
-    document.querySelectorAll('.rows').forEach(function (ul) {
-      ul.querySelectorAll('li').forEach(function (li, i) { li.style.transitionDelay = (i * 0.06) + 's'; });
-    });
-    if (!('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('in'); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    items.forEach(function (el) { io.observe(el); });
-
-    var header = document.querySelector('header');
-    function onScroll() { header.classList.toggle('scrolled', window.scrollY > 8); }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-  /* ---------- fondo: pistas de PCB con señales ---------- */
-  (function () {
-    var cv = document.getElementById('bg');
-    var ctx = cv.getContext('2d');
-    var G = 26;                       // paso de la grilla
-    var DIRS = [[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
-    var W, H, dpr, traces = [], pulses = [], base = null, col = {};
-    var mouse = { x: -9999, y: -9999 };
-
-    function readColors() {
-      var s = getComputedStyle(document.documentElement);
-      col.trace = s.getPropertyValue('--trace').trim();
-      col.accent = s.getPropertyValue('--accent').trim();
-      col.bg = s.getPropertyValue('--bg').trim();
-    }
-
-    function build() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth; H = window.innerHeight;
-      cv.width = W * dpr; cv.height = H * dpr;
-      cv.style.width = W + 'px'; cv.style.height = H + 'px';
-
-      var cols = Math.ceil(W / G) + 1, rows = Math.ceil(H / G) + 1;
-      var used = {};
-      traces = [];
-      var n = Math.round(cols * rows / 11);
-      for (var t = 0; t < n; t++) {
-        var x = Math.floor(Math.random() * cols), y = Math.floor(Math.random() * rows);
-        if (used[x + ',' + y]) continue;
-        var d = Math.floor(Math.random() * 4) * 2;   // arranca ortogonal
-        var steps = 4 + Math.floor(Math.random() * 14);
-        var pts = [[x, y]];
-        used[x + ',' + y] = 1;
-        for (var k = 0; k < steps; k++) {
-          var r = Math.random();
-          if (d % 2 === 1 && r < 0.5) d = (d + (Math.random() < 0.5 ? 1 : 7)) % 8;      // sale del diagonal
-          else if (d % 2 === 0 && r < 0.18) d = (d + (Math.random() < 0.5 ? 1 : 7)) % 8; // gira 45°
-          var nx = x + DIRS[d][0], ny = y + DIRS[d][1];
-          if (nx < 0 || ny < 0 || nx >= cols || ny >= rows || used[nx + ',' + ny]) break;
-          x = nx; y = ny; used[x + ',' + y] = 1;
-          pts.push([x, y]);
-        }
-        if (pts.length < 4) continue;
-        // simplificar: quedarse solo con los quiebres
-        var simple = [pts[0]];
-        for (var j = 1; j < pts.length - 1; j++) {
-          var a = pts[j - 1], b = pts[j], c = pts[j + 1];
-          if ((b[0] - a[0]) !== (c[0] - b[0]) || (b[1] - a[1]) !== (c[1] - b[1])) simple.push(b);
-        }
-        simple.push(pts[pts.length - 1]);
-        var px = simple.map(function (p) { return [p[0] * G, p[1] * G]; });
-        var cum = [0];
-        for (var m = 1; m < px.length; m++) {
-          cum.push(cum[m - 1] + Math.hypot(px[m][0] - px[m - 1][0], px[m][1] - px[m - 1][1]));
-        }
-        traces.push({ p: px, cum: cum, len: cum[cum.length - 1], cx: 0, cy: 0 });
-      }
-      traces.forEach(function (tr) {
-        var sx = 0, sy = 0;
-        tr.p.forEach(function (p) { sx += p[0]; sy += p[1]; });
-        tr.cx = sx / tr.p.length; tr.cy = sy / tr.p.length;
-      });
-      drawBase();
-    }
-
-    function path(c, tr) {
-      c.beginPath();
-      c.moveTo(tr.p[0][0], tr.p[0][1]);
-      for (var i = 1; i < tr.p.length; i++) c.lineTo(tr.p[i][0], tr.p[i][1]);
-    }
-
-    function pads(c, tr, color) {
-      [tr.p[0], tr.p[tr.p.length - 1]].forEach(function (p) {
-        c.beginPath();
-        c.arc(p[0], p[1], 3.2, 0, Math.PI * 2);
-        c.fillStyle = col.bg; c.fill();
-        c.lineWidth = 1.4; c.strokeStyle = color; c.stroke();
-      });
-    }
-
-    function drawBase() {
-      base = document.createElement('canvas');
-      base.width = cv.width; base.height = cv.height;
-      var b = base.getContext('2d');
-      b.setTransform(dpr, 0, 0, dpr, 0, 0);
-      b.lineCap = 'round'; b.lineJoin = 'round';
-      traces.forEach(function (tr) {
-        path(b, tr);
-        b.lineWidth = 1.4; b.strokeStyle = col.trace; b.stroke();
-        pads(b, tr, col.trace);
-      });
-    }
-
-    function pointAt(tr, d) {
-      for (var i = 1; i < tr.cum.length; i++) {
-        if (d <= tr.cum[i]) {
-          var f = (d - tr.cum[i - 1]) / (tr.cum[i] - tr.cum[i - 1] || 1);
-          var a = tr.p[i - 1], b = tr.p[i];
-          return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
-        }
-      }
-      return tr.p[tr.p.length - 1];
-    }
-
-    function spawn(tr) {
-      if (!tr) tr = traces[Math.floor(Math.random() * traces.length)];
-      if (!tr) return;
-      pulses.push({ tr: tr, d: 0, v: 70 + Math.random() * 90 });
-    }
-
-    var last = 0, acc = 0;
-    function frame(now) {
-      var dt = Math.min((now - last) / 1000, 0.05); last = now;
-      acc += dt;
-      if (acc > 0.35) { acc = 0; spawn(); }
-
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, cv.width, cv.height);
-      ctx.drawImage(base, 0, 0);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-
-      // pistas cerca del mouse se iluminan
-      traces.forEach(function (tr) {
-        var dist = Math.hypot(tr.cx - mouse.x, tr.cy - mouse.y);
-        if (dist < 170) {
-          ctx.globalAlpha = (1 - dist / 170) * 0.55;
-          path(ctx, tr);
-          ctx.lineWidth = 1.4; ctx.strokeStyle = col.accent; ctx.stroke();
-          pads(ctx, tr, col.accent);
-        }
-      });
-
-      // señales viajando
-      for (var i = pulses.length - 1; i >= 0; i--) {
-        var p = pulses[i];
-        p.d += p.v * dt;
-        if (p.d > p.tr.len + 40) { pulses.splice(i, 1); continue; }
-        var tail = 40;
-        for (var s = 0; s < 8; s++) {
-          var dd = p.d - (tail * s / 8);
-          if (dd < 0 || dd > p.tr.len) continue;
-          var q = pointAt(p.tr, dd);
-          ctx.globalAlpha = (1 - s / 8) * 0.8;
-          ctx.beginPath();
-          ctx.arc(q[0], q[1], s === 0 ? 2.2 : 1.6, 0, Math.PI * 2);
-          ctx.fillStyle = col.accent; ctx.fill();
-        }
-      }
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(frame);
-    }
-
-    readColors();
-    build();
-
-    if (reduce) { ctx.drawImage(base, 0, 0); return; }
-
-    window.addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
-    window.addEventListener('mouseleave', function () { mouse.x = mouse.y = -9999; });
-    // al hacer clic, las pistas cercanas disparan señales
-    window.addEventListener('click', function (e) {
-      traces.forEach(function (tr) {
-        if (Math.hypot(tr.cx - e.clientX, tr.cy - e.clientY) < 150) spawn(tr);
-      });
-    });
-    var rt;
-    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(build, 200); });
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { readColors(); drawBase(); });
-
-    for (var k = 0; k < 6; k++) spawn();
-    requestAnimationFrame(function (t) { last = t; frame(t); });
-  })();
-</script>
+<script src="assets/main.js"></script>
 </body>
 </html>

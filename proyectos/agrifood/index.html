@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgriFood · Martín Gimenez</title>
+<meta name="description" content="Sistema de gestión para el laboratorio de análisis AgriFood: órdenes, muestras, resultados, clientes y caja.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../" data-page="proyectos">
+
+<main class="wrap">
+
+  <div class="page-head">
+    <p class="crumb"><a href="../../"><span lang="es">Inicio</span><span lang="en">Home</span></a> / <a href="../"><span lang="es">Proyectos</span><span lang="en">Projects</span></a> / AgriFood</p>
+    <h1><span lang="es">Sistema de gestión del laboratorio AgriFood</span><span lang="en">AgriFood lab management system</span></h1>
+    <p class="lead" lang="es">Un solo lugar para que el laboratorio reciba muestras, cargue resultados y lleve la parte administrativa, en vez de planillas sueltas.</p>
+    <p class="lead" lang="en">One place for the lab to receive samples, enter results and handle the admin side, instead of scattered spreadsheets.</p>
+  </div>
+
+  <!-- Reemplazá por: <div class="ph shot"><img src="../../img/agrifood-1.png" alt="Sistema AgriFood"></div> -->
+  <div class="ph shot"><span lang="es">captura del sistema</span><span lang="en">system screenshot</span></div>
+
+  <section>
+    <ul class="rows">
+      <li><span class="k"><span lang="es">Cliente</span><span lang="en">Client</span></span><span class="v"><span lang="es">Laboratorio AgriFood · análisis de suelo y foliar</span><span lang="en">AgriFood lab · soil and leaf analysis</span></span></li>
+      <li><span class="k"><span lang="es">Mi rol</span><span lang="en">My role</span></span><span class="v"><span lang="es">Desarrollo completo, servidor y puesta en producción, desde <a href="../../hiletsconnect/">HiLetsConnect</a>.</span><span lang="en">Full development, server and deployment, through <a href="../../hiletsconnect/">HiLetsConnect</a>.</span></span></li>
+      <li><span class="k">Stack</span><span class="v stack">Node.js · SQLite · JavaScript (ES modules) · HTML/CSS · Linux · systemd · Proxmox</span></li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">Qué hace</span><span lang="en">What it does</span></p>
+    <ul lang="es">
+      <li><strong>Órdenes de trabajo</strong> con varias muestras cada una y carga de resultados en formato planilla.</li>
+      <li><strong>Catálogo de determinaciones</strong> con código, unidad, método y precio, con ajuste masivo de precios y paquetes sugeridos.</li>
+      <li><strong>Escalas de interpretación</strong> por colores para cada determinación, con editor y vista previa en vivo.</li>
+      <li><strong>Tipos de muestra</strong> configurables (suelo, foliar, agua de riego, compost…).</li>
+      <li><strong>Clientes, presupuestos y caja</strong>.</li>
+      <li><strong>Roles</strong>: administración, recepción y analistas, cada uno con sus permisos.</li>
+      <li>Scripts para importar los datos que el laboratorio ya tenía en planillas.</li>
+    </ul>
+    <ul lang="en">
+      <li><strong>Work orders</strong> with multiple samples each and spreadsheet-style result entry.</li>
+      <li><strong>Test catalogue</strong> with code, unit, method and price, bulk price updates and suggested bundles.</li>
+      <li><strong>Color-coded interpretation scales</strong> for each test, with an editor and live preview.</li>
+      <li>Configurable <strong>sample types</strong> (soil, leaf, irrigation water, compost…).</li>
+      <li><strong>Clients, quotes and billing</strong>.</li>
+      <li><strong>Roles</strong>: admin, front desk and analysts, each with their own permissions.</li>
+      <li>Scripts to import the data the lab already had in spreadsheets.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <p class="label"><span lang="es">Cómo está hecho</span><span lang="en">How it's built</span></p>
+    <p lang="es">Lo hice con Node y SQLite <strong>sin ninguna dependencia externa</strong>: el servidor usa solo módulos nativos y el frontend son módulos de JavaScript que el navegador carga directo, sin compilación. La idea fue que sea simple de mantener a largo plazo: se edita un archivo, se reinicia el servicio y listo.</p>
+    <p lang="es">Las contraseñas se guardan con scrypt y sal por usuario. El sistema corre en su propio contenedor en mi servidor Proxmox, como servicio que arranca solo, con copias de seguridad automáticas de la base de datos.</p>
+    <p lang="en">I built it with Node and SQLite and <strong>zero external dependencies</strong>: the server uses only built-in modules and the frontend is plain JavaScript modules the browser loads directly, with no build step. The goal was to keep it easy to maintain long-term: edit a file, restart the service, done.</p>
+    <p lang="en">Passwords are stored with scrypt and a per-user salt. The system runs in its own container on my Proxmox server as a service that starts on boot, with automatic database backups.</p>
+  </section>
+
+  <section>
+    <p class="label"><span lang="es">Galería</span><span lang="en">Gallery</span></p>
+    <div class="gallery">
+      <div class="ph"><span lang="es">orden de trabajo</span><span lang="en">work order</span></div>
+      <div class="ph"><span lang="es">carga de resultados</span><span lang="en">result entry</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="pager">
+      <a href="../rem/"><span lang="es">← Anterior</span><span lang="en">← Previous</span><strong>REM</strong></a>
+      <a href="../aaf/"><span lang="es">Siguiente →</span><span lang="en">Next →</span><strong><span lang="es">Sitio AAF</span><span lang="en">AAF website</span></strong></a>
+    </div>
+  </section>
+
+</main>
+
+<script src="../../assets/main.js"></script>
+</body>
+</html>
