@@ -13,19 +13,21 @@
     return '<a href="' + href + '"' + (page === key ? ' class="active"' : '') + '>' + t(es, en) + '</a>';
   }
 
+  var soon = page === 'soon';               // portada "Próximamente": sin menú
   var header = document.createElement('header');
   header.innerHTML =
     '<div class="wrap">' +
       '<a href="' + (R || './') + '" class="brand">Martín Gimenez</a>' +
       '<nav>' +
+        (soon ? '' :
         '<div class="links-nav">' +
           nav('proyectos', R + 'proyectos/', 'Proyectos', 'Projects') +
           nav('hiletsconnect', R + 'hiletsconnect/', 'HiletsConnect', 'HiletsConnect') +
           nav('trayectoria', R + 'trayectoria/', 'Trayectoria', 'Background') +
           '<a href="#contacto">' + t('Contacto', 'Contact') + '</a>' +
-        '</div>' +
+        '</div>') +
         '<button class="lang" type="button" aria-label="Cambiar idioma / Switch language">EN</button>' +
-        '<button class="menu" type="button" aria-label="Menú">' + t('Menú', 'Menu') + '</button>' +
+        (soon ? '' : '<button class="menu" type="button" aria-label="Menú">' + t('Menú', 'Menu') + '</button>') +
       '</nav>' +
     '</div>';
   body.insertBefore(header, body.firstChild);
@@ -51,7 +53,8 @@
     '</div>';
   body.appendChild(footer);
 
-  header.querySelector('.menu').addEventListener('click', function () { header.classList.toggle('open'); });
+  var menuBtn = header.querySelector('.menu');
+  if (menuBtn) menuBtn.addEventListener('click', function () { header.classList.toggle('open'); });
   header.querySelectorAll('.links-nav a').forEach(function (a) {
     a.addEventListener('click', function () { header.classList.remove('open'); });
   });
